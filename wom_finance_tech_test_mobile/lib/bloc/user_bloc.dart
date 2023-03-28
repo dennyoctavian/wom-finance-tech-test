@@ -11,11 +11,19 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEvent>((event, emit) async {
       if (event is RegisterUser) {
         try {
-          UserServices.register(event.name, event.email, event.password,
-              event.confirmPassword, event.pictureUrl);
+          emit(UserLoading());
+          await UserServices.register(
+              event.name,
+              event.email,
+              event.password,
+              event.confirmPassword,
+              event.pictureUrl,
+              event.address,
+              event.phoneNumber);
 
           final response = await UserServices.getUser();
-          if (response.message != null) {
+
+          if (response.value != null) {
             emit(UserLoaded(response.value!));
           } else {
             emit(UserLoadedFailed(response.message ?? ''));
@@ -27,7 +35,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
       if (event is LoginUser) {
         try {
-          UserServices.login(
+          emit(UserLoading());
+          await UserServices.login(
             event.email,
             event.password,
           );

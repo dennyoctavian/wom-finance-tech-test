@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -8,6 +7,9 @@ import 'package:wom_finance_tech_test_mobile/bloc/blocs.dart';
 import 'package:wom_finance_tech_test_mobile/models/models.dart';
 import 'package:wom_finance_tech_test_mobile/services/services.dart';
 import 'package:wom_finance_tech_test_mobile/shared/shared.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 part 'cart_page.dart';
 part 'detail_transaction_page.dart';

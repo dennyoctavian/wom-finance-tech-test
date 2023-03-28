@@ -26,6 +26,7 @@ class JWTAuthController extends Controller
                       'confirm_password' => 'required|same:password',
                       "picture_path" => "required|string",
                       "address" => "required|string",
+                      "phone_number" => "required"
                      ]);  
  
          if ($validator->fails()) {  
@@ -41,6 +42,7 @@ class JWTAuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->picture_path = $request->picture_path;
         $user->address = $request->address;
+        $user->phone_number = $request->phone_number;
         $user->save();
   
         if ($this->token) {

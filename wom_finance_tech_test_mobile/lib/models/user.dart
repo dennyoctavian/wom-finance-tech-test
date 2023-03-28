@@ -26,7 +26,7 @@ class User extends Equatable {
         name: data['name'],
         email: data['email'],
         picturePath: data['profile_photo_url'],
-        phoneNumber: data['phoneNumber'],
+        phoneNumber: data['phone_number'],
         address: data['address'],
         createdAt: DateTime.parse(data['created_at']),
         updatedAt: DateTime.parse(data['updated_at']),

@@ -1,8 +1,7 @@
 part of 'pages.dart';
 
 class ProductPage extends StatefulWidget {
-  final List<Product> listCart;
-  const ProductPage(this.listCart, {super.key});
+  const ProductPage({super.key});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -102,12 +101,12 @@ class _ProductPageState extends State<ProductPage> {
                                   e.quantity == 0
                                       ? ElevatedButton(
                                           onPressed: () {
-                                            if (widget.listCart.contains(e)) {
+                                            if (listCart.contains(e)) {
                                               e.quantity++;
                                               setState(() {});
                                             } else {
                                               e.quantity++;
-                                              widget.listCart.add(e);
+                                              listCart.add(e);
                                               setState(() {});
                                             }
                                           },
@@ -133,7 +132,7 @@ class _ProductPageState extends State<ProductPage> {
                                               onTap: () {
                                                 if (e.quantity == 1) {
                                                   e.quantity = 0;
-                                                  widget.listCart.remove(e);
+                                                  listCart.remove(e);
                                                   setState(() {});
                                                 } else {
                                                   e.quantity--;

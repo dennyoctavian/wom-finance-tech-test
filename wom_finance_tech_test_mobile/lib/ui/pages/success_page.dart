@@ -46,11 +46,11 @@ class SuccessPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: defaultMargin),
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()),
-                          (route) => false);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                         elevation: 0,

@@ -1,14 +1,14 @@
 part of 'pages.dart';
 
 class CartPage extends StatefulWidget {
-  final List<Product> listCart;
-  const CartPage(this.listCart, {super.key});
+  const CartPage({super.key});
 
   @override
   State<CartPage> createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -78,7 +78,7 @@ class _CartPageState extends State<CartPage> {
                                         onTap: () {
                                           if (e.quantity == 1) {
                                             e.quantity = 0;
-                                            widget.listCart.remove(e);
+                                            listCart.remove(e);
                                             setState(() {});
                                           } else {
                                             e.quantity--;
@@ -127,42 +127,58 @@ class _CartPageState extends State<CartPage> {
                             height: 45,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: defaultMargin),
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  ApiReturnValue<Transaction> transaction =
-                                      await TransactionServices.makeTransaction(
-                                          widget.listCart);
-
-                                  if (transaction.value != null) {
-                                    widget.listCart.clear();
-                                    if (!mounted) return;
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SuccessPage()),
-                                        (route) => false);
-                                  } else {
-                                    // if (!mounted) return;
-                                    // Flushbar(
-                                    //   message: transaction.message,
-                                    //   flushbarPosition: FlushbarPosition.TOP,
-                                    //   backgroundColor: const Color(0xffFF2566),
-                                    //   duration: const Duration(seconds: 2),
-                                    // ).show(context);
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    backgroundColor: Colors.blue),
-                                child: Text(
-                                  "Check Out",
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                )),
+                            child: isLoading
+                                ? const Center(
+                                    child: SpinKitFadingCircle(
+                                      size: 45,
+                                      color: Colors.yellow,
+                                    ),
+                                  )
+                                : ElevatedButton(
+                                    onPressed: () async {
+                                      setState(() {
+                                        isLoading = true;
+                                      });
+                                      ApiReturnValue<Transaction> transaction =
+                                          await TransactionServices
+                                              .makeTransaction(listCart);
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      if (transaction.value != null) {
+                                        for (var item in listCart) {
+                                          item.quantity = 0;
+                                        }
+                                        listCart.clear();
+                                        if (!mounted) return;
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const SuccessPage()),
+                                            (route) => false);
+                                      } else {
+                                        // if (!mounted) return;
+                                        // Flushbar(
+                                        //   message: transaction.message,
+                                        //   flushbarPosition: FlushbarPosition.TOP,
+                                        //   backgroundColor: const Color(0xffFF2566),
+                                        //   duration: const Duration(seconds: 2),
+                                        // ).show(context);
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        backgroundColor: Colors.blue),
+                                    child: Text(
+                                      "Check Out",
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500),
+                                    )),
                           ),
                         )
                       : Container(),

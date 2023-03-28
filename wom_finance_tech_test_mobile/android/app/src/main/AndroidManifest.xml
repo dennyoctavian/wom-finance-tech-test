@@ -2,6 +2,7 @@
     package="com.example.wom_finance_tech_test_mobile">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
    <application
         android:label="wom_finance_tech_test_mobile"
         android:name="${applicationName}"

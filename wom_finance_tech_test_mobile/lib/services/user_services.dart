@@ -13,6 +13,10 @@ class UserServices {
       },
     );
 
+    print(token);
+
+    print(response.body);
+
     if (response.statusCode != 200) {
       return ApiReturnValue(message: "Please try again");
     }
@@ -24,8 +28,14 @@ class UserServices {
     return ApiReturnValue(value: user);
   }
 
-  static Future<ApiReturnValue<void>> register(String name, String email,
-      String password, String confirmPassword, String pictureUrl,
+  static Future<ApiReturnValue<void>> register(
+      String name,
+      String email,
+      String password,
+      String confirmPassword,
+      String pictureUrl,
+      String? address,
+      String phoneNumber,
       {http.Client? client}) async {
     client ??= http.Client();
     String url = '${baseURL}register';
@@ -42,12 +52,12 @@ class UserServices {
         "password": password,
         "confirm_password": confirmPassword,
         "picture_path": pictureUrl,
-        // ignore: todo
-        // TODO menggunakan geolocator
-        "address":
-            "Jl. Karang Anyar A No.39, RT.16/RW.6, Karang Anyar, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10740"
+        "phone_number": phoneNumber,
+        "address": address ?? 'No Access Location From User'
       },
     );
+
+    print(response.body);
 
     if (response.statusCode != 200) {
       return ApiReturnValue(message: jsonDecode(response.body)['message']);
@@ -78,7 +88,7 @@ class UserServices {
       return ApiReturnValue(message: jsonDecode(response.body)['message']);
     }
     var data = jsonDecode(response.body);
-    UserServices.storeCredentialToLocal(data['token']);
+    await UserServices.storeCredentialToLocal(data['token']);
     return ApiReturnValue();
   }
 

@@ -56,6 +56,9 @@ class TransactionController extends Controller
             $listItem->transaction_id = $transaction->id;
             $productSales = Product::where('id', $product['product_id'])->first();;
             $total_price_item = ($productSales->price)*$product['quantity'];
+            if ($productSales->stock < $product['quantity']) {  
+                return response()->json(['error'=>"$productSales->name stok tidak mencukupi"], 500); 
+            }
             $productSales->stock = $productSales->stock - $product['quantity'];
             $productSales->update();
             $listItem->total_price_item =  $total_price_item;

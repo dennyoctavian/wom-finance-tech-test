@@ -15,13 +15,22 @@ class RegisterUser extends UserEvent {
   final String password;
   final String confirmPassword;
   final String pictureUrl;
+  final String address;
+  final String phoneNumber;
 
   const RegisterUser(this.name, this.email, this.confirmPassword,
-      this.pictureUrl, this.password);
+      this.pictureUrl, this.password, this.address, this.phoneNumber);
 
   @override
-  List<Object> get props =>
-      [name, email, password, confirmPassword, pictureUrl];
+  List<Object> get props => [
+        name,
+        email,
+        password,
+        confirmPassword,
+        pictureUrl,
+        address,
+        phoneNumber
+      ];
 }
 
 class LoginUser extends UserEvent {

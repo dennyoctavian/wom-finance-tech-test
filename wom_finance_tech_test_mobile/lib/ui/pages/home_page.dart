@@ -21,11 +21,11 @@ class _HomePageState extends State<HomePage> {
           bottomNavbarIndex = value;
           setState(() {});
         },
-        children: [
-          ProductPage(listCart),
-          CartPage(listCart),
-          const MyTransaction(),
-          const AccountPage(),
+        children: const [
+          ProductPage(),
+          CartPage(),
+          MyTransaction(),
+          AccountPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
