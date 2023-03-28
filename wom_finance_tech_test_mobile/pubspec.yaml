@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  another_flushbar: ^1.12.29
   bloc: ^8.1.1
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
@@ -35,7 +36,10 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.2
   flutter_secure_storage: ^8.0.0
+  flutter_spinkit: ^5.1.0
+  google_fonts: ^4.0.3
   http: ^0.13.5
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

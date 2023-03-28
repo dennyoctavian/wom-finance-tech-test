@@ -7,78 +7,49 @@ class Product extends Equatable {
   final String description;
   final int price;
   final int stock;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  int quantity;
 
-  const Product({
+  Product({
     required this.id,
     required this.picturePath,
     required this.name,
     required this.description,
     required this.price,
     required this.stock,
+    required this.createdAt,
+    required this.updatedAt,
+    this.quantity = 0,
   });
 
   factory Product.fromJson(Map<String, dynamic> data) => Product(
         id: data['id'],
-        picturePath: data['picture_path'],
+        picturePath: data['picturePath'],
         name: data['name'],
         description: data['description'],
         price: data['price'],
         stock: data['stock'],
+        createdAt: DateTime.parse(data['created_at']),
+        updatedAt: DateTime.parse(data['updated_at']),
       );
 
   @override
-  List<Object> get props => [id, picturePath, name, description, price, stock];
-}
+  List<Object> get props => [
+        id,
+        picturePath,
+        name,
+        description,
+        price,
+        stock,
+        createdAt,
+        updatedAt,
+      ];
 
-List<Product> mockProducts = [
-  const Product(
-    id: 1,
-    picturePath:
-        'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80',
-    name: 'Sate Sayur Sultan',
-    description:
-        "Bosan dengan sate ayam madura, kini aku coba membuat sate ayam dengan saus spesial. Rasa asam dari jeruk limau, pedas dari cabe rawit membuat saus ini sangat menyegarkan. Dijamin tambah nasi hihi",
-    price: 20000,
-    stock: 10,
-  ),
-  const Product(
-    id: 2,
-    picturePath:
-        'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80',
-    name: 'Sate Sayur Sultan',
-    description:
-        "Bosan dengan sate ayam madura, kini aku coba membuat sate ayam dengan saus spesial. Rasa asam dari jeruk limau, pedas dari cabe rawit membuat saus ini sangat menyegarkan. Dijamin tambah nasi hihi",
-    price: 20000,
-    stock: 10,
-  ),
-  const Product(
-    id: 3,
-    picturePath:
-        'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80',
-    name: 'Sate Sayur Sultan',
-    description:
-        "Bosan dengan sate ayam madura, kini aku coba membuat sate ayam dengan saus spesial. Rasa asam dari jeruk limau, pedas dari cabe rawit membuat saus ini sangat menyegarkan. Dijamin tambah nasi hihi",
-    price: 20000,
-    stock: 10,
-  ),
-  const Product(
-    id: 4,
-    picturePath:
-        'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80',
-    name: 'Sate Sayur Sultan',
-    description:
-        "Bosan dengan sate ayam madura, kini aku coba membuat sate ayam dengan saus spesial. Rasa asam dari jeruk limau, pedas dari cabe rawit membuat saus ini sangat menyegarkan. Dijamin tambah nasi hihi",
-    price: 20000,
-    stock: 20,
-  ),
-  const Product(
-    id: 5,
-    picturePath:
-        'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80',
-    name: 'Sate Sayur Sultan',
-    description:
-        "Bosan dengan sate ayam madura, kini aku coba membuat sate ayam dengan saus spesial. Rasa asam dari jeruk limau, pedas dari cabe rawit membuat saus ini sangat menyegarkan. Dijamin tambah nasi hihi",
-    price: 20000,
-    stock: 15,
-  )
-];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['product_id'] = id;
+    data['quantity'] = quantity;
+    return data;
+  }
+}

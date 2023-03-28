@@ -7,9 +7,8 @@ class User extends Equatable {
   final String? picturePath;
   final String? phoneNumber;
   final String? address;
-  final String? houseNumber;
-  final String? city;
-  static String? token;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   const User({
     this.id,
@@ -18,8 +17,8 @@ class User extends Equatable {
     this.phoneNumber,
     this.picturePath,
     this.address,
-    this.houseNumber,
-    this.city,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory User.fromJson(Map<String, dynamic> data) => User(
@@ -29,29 +28,9 @@ class User extends Equatable {
         picturePath: data['profile_photo_url'],
         phoneNumber: data['phoneNumber'],
         address: data['address'],
-        houseNumber: data['houseNumber'],
-        city: data['city'],
+        createdAt: DateTime.parse(data['created_at']),
+        updatedAt: DateTime.parse(data['updated_at']),
       );
-
-  User copyWith({
-    int? id,
-    String? name,
-    String? email,
-    String? address,
-    String? houseNumber,
-    String? phoneNumber,
-    String? city,
-    String? picturePath,
-  }) =>
-      User(
-          id: id ?? this.id,
-          name: name ?? this.name,
-          email: email ?? this.email,
-          address: address ?? this.address,
-          houseNumber: houseNumber ?? this.houseNumber,
-          phoneNumber: phoneNumber ?? this.phoneNumber,
-          city: city ?? this.city,
-          picturePath: picturePath ?? this.picturePath);
 
   @override
   List<Object> get props => [
@@ -59,19 +38,8 @@ class User extends Equatable {
         picturePath.toString(),
         email.toString(),
         address.toString(),
-        houseNumber.toString(),
         phoneNumber.toString(),
-        city.toString()
+        createdAt.toString(),
+        updatedAt.toString(),
       ];
 }
-
-User mockUser = const User(
-    id: 1,
-    name: 'Denny Octavian',
-    email: 'dennyoctavian164@gmail.com',
-    address: 'Jalan Menuju Ke Hati Mu',
-    houseNumber: '23',
-    phoneNumber: '08121181281281',
-    city: 'Jakarta',
-    picturePath:
-        'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80');

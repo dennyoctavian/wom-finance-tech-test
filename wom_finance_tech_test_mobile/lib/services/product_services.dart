@@ -1,10 +1,10 @@
 part of 'services.dart';
 
-class FoodServices {
-  static Future<ApiReturnValue<List<Product>>> getFoods(
+class ProductServices {
+  static Future<ApiReturnValue<List<Product>>> getProducts(
       {http.Client? client}) async {
     client ??= http.Client();
-    String url = '${baseURL}food';
+    String url = '${baseURL}products';
     var response = await client.get(
       Uri.parse(url),
     );
@@ -14,10 +14,10 @@ class FoodServices {
     }
 
     var data = jsonDecode(response.body);
+    print(data);
 
-    List<Product> foods = (data['data']['data'] as Iterable)
-        .map((e) => Product.fromJson(e))
-        .toList();
+    List<Product> foods =
+        (data['data'] as Iterable).map((e) => Product.fromJson(e)).toList();
 
     return ApiReturnValue(value: foods);
   }
