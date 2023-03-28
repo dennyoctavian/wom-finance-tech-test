@@ -7,13 +7,14 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-int bottomNavbarIndex = 0;
-PageController pageController = PageController(initialPage: bottomNavbarIndex);
 List<Product> listCart = [];
 
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    int bottomNavbarIndex = 0;
+    PageController pageController =
+        PageController(initialPage: bottomNavbarIndex);
     return Scaffold(
       body: PageView(
         controller: pageController,
