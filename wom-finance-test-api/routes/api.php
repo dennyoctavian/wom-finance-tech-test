@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\JWTAuthController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+ 
+Route::post('register', [JWTAuthController::class, 'register']);
+Route::post('login', [JWTAuthController::class, 'login']);
+Route::get('products', [ProductController::class, 'index']);
+  
+Route::group(['middleware' => 'auth.jwt'], function () {
+    Route::post('logout', [JWTAuthController::class, 'logout']);
+    Route::get('user', [JWTAuthController::class, 'getUser']);
+    Route::get('transactions', [TransactionController::class, 'index']);
+    Route::post('transaction/create', [TransactionController::class, 'create']);
 });
+
