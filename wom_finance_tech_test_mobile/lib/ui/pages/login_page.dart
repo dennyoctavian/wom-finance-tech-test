@@ -17,16 +17,17 @@ class _LoginPageState extends State<LoginPage> {
         child: BlocConsumer<UserBloc, UserState>(
           listener: (context, state) {
             if (state is UserLoadedFailed) {
-              // Flushbar(
-              //   duration: const Duration(milliseconds: 1500),
-              //   flushbarPosition: FlushbarPosition.TOP,
-              //   backgroundColor: const Color(0xffff5c83),
-              //   message: state.message,
-              // ).show(context);
-              // return;
+              Flushbar(
+                duration: const Duration(milliseconds: 1500),
+                flushbarPosition: FlushbarPosition.TOP,
+                backgroundColor: const Color(0xffff5c83),
+                message: state.message == '' ? 'Gagal Login' : state.message,
+              ).show(context);
+              return;
             } else if (state is UserLoaded) {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomePage()));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  (route) => false);
               return;
             }
           },

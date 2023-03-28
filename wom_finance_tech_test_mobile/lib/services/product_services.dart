@@ -14,7 +14,6 @@ class ProductServices {
     }
 
     var data = jsonDecode(response.body);
-    print(data);
 
     List<Product> foods =
         (data['data'] as Iterable).map((e) => Product.fromJson(e)).toList();

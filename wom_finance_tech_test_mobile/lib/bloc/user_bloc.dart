@@ -43,11 +43,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           final response = await UserServices.getUser();
           if (response.value != null) {
             emit(UserLoaded(response.value!));
+          } else {
+            emit(UserLoadedFailed(response.message ?? ''));
           }
-          emit(UserLoadedFailed(response.message ?? ''));
         } catch (e) {
           emit(UserLoadedFailed(e.toString()));
         }
+      }
+
+      if (event is WaitingUser) {
+        emit(UserLoading());
       }
 
       if (event is FetchUser) {

@@ -49,8 +49,6 @@ class TransactionServices {
           "products": bodyResponse,
         }));
 
-    print(response.body);
-
     if (response.statusCode != 200) {
       return ApiReturnValue(message: jsonDecode(response.body)['message']);
     }

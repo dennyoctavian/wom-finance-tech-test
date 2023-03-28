@@ -44,3 +44,5 @@ class LoginUser extends UserEvent {
 }
 
 class LogoutUser extends UserEvent {}
+
+class WaitingUser extends UserEvent {}

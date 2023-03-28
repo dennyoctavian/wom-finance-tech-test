@@ -158,13 +158,17 @@ class _CartPageState extends State<CartPage> {
                                                     const SuccessPage()),
                                             (route) => false);
                                       } else {
-                                        // if (!mounted) return;
-                                        // Flushbar(
-                                        //   message: transaction.message,
-                                        //   flushbarPosition: FlushbarPosition.TOP,
-                                        //   backgroundColor: const Color(0xffFF2566),
-                                        //   duration: const Duration(seconds: 2),
-                                        // ).show(context);
+                                        if (!mounted) return;
+                                        Flushbar(
+                                          message: transaction.message == ''
+                                              ? 'Gagal Melakukan Transaksi'
+                                              : transaction.message,
+                                          flushbarPosition:
+                                              FlushbarPosition.TOP,
+                                          backgroundColor:
+                                              const Color(0xffFF2566),
+                                          duration: const Duration(seconds: 2),
+                                        ).show(context);
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(

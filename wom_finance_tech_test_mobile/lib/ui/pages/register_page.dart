@@ -85,7 +85,12 @@ class _RegisterPageState extends State<RegisterPage> {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const HomePage()));
             } else if (state is UserLoadedFailed) {
-              print(state.message);
+              Flushbar(
+                duration: const Duration(milliseconds: 1500),
+                flushbarPosition: FlushbarPosition.TOP,
+                backgroundColor: const Color(0xffff5c83),
+                message: state.message == '' ? 'Gagal Login' : state.message,
+              ).show(context);
             }
           },
           builder: (context, state) {
@@ -260,6 +265,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             horizontal: defaultMargin),
                         child: ElevatedButton(
                             onPressed: () async {
+                              if (!mounted) return;
+                              context.read<UserBloc>().add(WaitingUser());
                               isSigningUp = true;
                               setState(() {});
                               await _getCurrentPosition();

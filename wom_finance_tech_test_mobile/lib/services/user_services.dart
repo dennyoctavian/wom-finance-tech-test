@@ -13,10 +13,6 @@ class UserServices {
       },
     );
 
-    print(token);
-
-    print(response.body);
-
     if (response.statusCode != 200) {
       return ApiReturnValue(message: "Please try again");
     }
@@ -56,8 +52,6 @@ class UserServices {
         "address": address ?? 'No Access Location From User'
       },
     );
-
-    print(response.body);
 
     if (response.statusCode != 200) {
       return ApiReturnValue(message: jsonDecode(response.body)['message']);

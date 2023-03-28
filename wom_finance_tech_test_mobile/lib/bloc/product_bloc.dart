@@ -11,7 +11,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       if (event is FetchProducts) {
         ApiReturnValue<List<Product>> result =
             await ProductServices.getProducts();
-        print(result);
         if (result.message == null) {
           emit(ProductLoaded(result.value!));
         } else {
