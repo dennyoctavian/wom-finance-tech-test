@@ -8,4 +8,4 @@ part 'product_services.dart';
 part 'user_services.dart';
 part 'transaction_services.dart';
 
-String baseURL = "https://09b1-112-215-65-120.ap.ngrok.io/api/";
+String baseURL = "https://api-test-wom-finance-production.up.railway.app/api/";
