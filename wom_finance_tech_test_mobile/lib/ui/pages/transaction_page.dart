@@ -34,19 +34,24 @@ class MyTransaction extends StatelessWidget {
                               },
                               child: Row(
                                 children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    margin: const EdgeInsets.only(
-                                        right: 12, bottom: 12),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        image: DecorationImage(
-                                            image: NetworkImage(e.products?[0]
-                                                    .product?.picturePath ??
-                                                ''),
-                                            fit: BoxFit.cover)),
-                                  ),
+                                  ((e.products?.length ?? 0) >= 1)
+                                      ? Container(
+                                          width: 60,
+                                          height: 60,
+                                          margin: const EdgeInsets.only(
+                                              right: 12, bottom: 12),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              image: DecorationImage(
+                                                  image: NetworkImage(e
+                                                          .products?[0]
+                                                          .product
+                                                          ?.picturePath ??
+                                                      ''),
+                                                  fit: BoxFit.cover)),
+                                        )
+                                      : Container(),
                                   SizedBox(
                                     child: Column(
                                       crossAxisAlignment:
